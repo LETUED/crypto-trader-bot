@@ -1,0 +1,128 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Environment Variables
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Freqtrade specific
+user_data/
+config/freqtrade_config.json
+config/backtest_config.json
+config/*.json
+!config/config_template.json
+
+# Freqtrade database and cache files
+tradesv3.*
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.db
+
+# Freqtrade logs and results
+freqtrade_config/logs/
+freqtrade_config/user_data/
+freqtrade_config/backtest_results/
+freqtrade_config/hyperopt_results/
+freqtrade_config/plot/
+
+# Backtest results
+comprehensive_backtest_results.json
+*backtest_results*
+
+# Data files
+data/
+
+# Logs
+logs/
+*.log
+monigomani.log
+rsi.log
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Documentation
+docs/_build/
+
+# Package files
+*.tar.gz
+*.zip
+
+# API Keys and Secrets (extra safety)
+*api_key*
+*secret*
+*token*
+*password*
+!*example*
+!*template*
+
+# Telegram bot tokens
+telegram_token.txt
+chat_id.txt.cursor/

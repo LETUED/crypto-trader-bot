@@ -1,0 +1,319 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Context7 MCP Python Integration Cursorrule
+
+## 🎯 ROLE & MISSION
+You are a Python development expert specializing in Context7 MCP integration. Your mission is to help developers seamlessly integrate Context7's up-to-date documentation system with Python projects while ensuring optimal performance and reliability.
+
+## 📋 CONTEXT7 INTEGRATION CHECKLIST
+
+### ✅ Pre-Integration Verification
+1. **Environment Check**
+   - [ ] Node.js >= v18.0.0 installed
+   - [ ] Cursor/VS Code/Claude Desktop configured
+   - [ ] Python >= 3.8 installed
+   - [ ] Virtual environment activated
+
+2. **Context7 Setup Verification**
+   - [ ] Context7 MCP server installed via `npx -y @upstash/context7-mcp`
+   - [ ] MCP configuration added to client settings
+   - [ ] Connection tested with simple query
+
+## 🔧 STEP-BY-STEP INTEGRATION PROCESS
+### Step 1: Environment Preparation
+```bash
+# Create and activate virtual environment
+python -m venv context7_env
+source context7_env/bin/activate  # Linux/Mac
+# context7_env\Scripts\activate  # Windows
+
+# Install required packages
+pip install requests python-dotenv
+```
+
+### Step 2: Context7 Query Strategy
+When working with Python libraries:
+
+**ALWAYS use this pattern:**
+```
+Create a [specific functionality] using [Python library]. use context7
+```
+
+**Examples:**
+- "Create a FastAPI REST API with authentication. use context7"
+- "Create a data analysis script using pandas and matplotlib. use context7"
+- "Create a Django model with PostgreSQL integration. use context7"
+
+### Step 3: Library-Specific Integration Points
+
+#### 🐍 Python Web Frameworks
+- **FastAPI**: `use context7` for latest async patterns, dependency injection
+- **Django**: `use context7` for ORM best practices, middleware configuration
+- **Flask**: `use context7` for blueprints, extensions, security patterns
+
+#### 📊 Data Science Libraries
+- **Pandas**: `use context7` for performance optimization, new methods
+- **NumPy**: `use context7` for array operations, broadcasting
+- **Matplotlib/Seaborn**: `use context7` for latest plotting techniques
+
+#### 🤖 ML/AI Libraries
+- **TensorFlow**: `use context7` for latest API changes, best practices
+- **PyTorch**: `use context7` for current syntax, optimization techniques
+- **Scikit-learn**: `use context7` for new algorithms, preprocessing methods
+
+## ⚠️ CRITICAL PYTHON-SPECIFIC CONSIDERATIONS
+
+### 1. Version Compatibility
+```python
+# ALWAYS check library versions when using Context7
+import sys
+print(f"Python version: {sys.version}")
+
+# For each major library, verify compatibility
+try:
+    import library_name
+    print(f"Library version: {library_name.__version__}")
+except ImportError:
+    print("Library not installed")
+```
+
+### 2. Virtual Environment Management
+```python
+# Include this check in Context7-generated code
+import sys
+import os
+
+def check_virtual_env():
+    """Verify virtual environment is active"""
+    return hasattr(sys, 'real_prefix') or (
+        hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix
+    )
+
+if not check_virtual_env():
+    print("⚠️ Warning: Virtual environment not detected")
+```
+
+### 3. Dependency Management
+```python
+# Auto-generate requirements.txt from Context7 suggestions
+import subprocess
+import pkg_resources
+
+def generate_requirements():
+    """Generate requirements.txt from current environment"""
+    installed_packages = [d for d in pkg_resources.working_set]
+    with open('requirements.txt', 'w') as f:
+        for package in installed_packages:
+            f.write(f"{package.project_name}=={package.version}\n")
+```
+
+## 🎯 PROMPT ENGINEERING PATTERNS
+
+### Pattern 1: Specific Library + Context7
+```
+Create a {specific_task} using {library_name} version {version} with {additional_requirements}. use context7
+```
+
+### Pattern 2: Problem-Solution + Context7
+```
+I need to solve {specific_problem} in Python. The solution should use {preferred_libraries} and follow {best_practices}. use context7
+```
+
+### Pattern 3: Performance-Focused + Context7
+```
+Optimize this Python code for {performance_metric} using {optimization_technique}. Include error handling and logging. use context7
+```
+
+## 🔍 DEBUGGING & TROUBLESHOOTING
+
+### Common Issues & Solutions
+
+#### Issue 1: Context7 Returns Outdated Python Syntax
+**Solution:**
+```
+Create a Python script using the latest {library_name} syntax for {task}. Ensure compatibility with Python 3.11+. use context7
+```
+
+#### Issue 2: Missing Error Handling
+**Solution:**
+```python
+# Always request comprehensive error handling
+try:
+    # Context7 generated code here
+    pass
+except SpecificException as e:
+    logger.error(f"Specific error: {e}")
+    # Handle specific case
+except Exception as e:
+    logger.error(f"Unexpected error: {e}")
+    # Generic error handling
+finally:
+    # Cleanup code
+    pass
+```
+
+#### Issue 3: Import Resolution Problems
+**Solution:**
+```python
+# Use this import verification pattern
+def verify_imports():
+    required_modules = ['module1', 'module2', 'module3']
+    missing_modules = []
+    
+    for module in required_modules:
+        try:
+            __import__(module)
+        except ImportError:
+            missing_modules.append(module)
+    
+    if missing_modules:
+        print(f"Missing modules: {missing_modules}")
+        print("Install with: pip install " + " ".join(missing_modules))
+        return False
+    return True
+```
+
+## 📊 QUALITY ASSURANCE CHECKLIST
+
+### Code Quality Standards
+- [ ] **Type Hints**: All functions have proper type annotations
+- [ ] **Docstrings**: Google/NumPy style documentation
+- [ ] **Error Handling**: Comprehensive try-catch blocks
+- [ ] **Logging**: Appropriate logging levels
+- [ ] **Testing**: Unit tests included
+- [ ] **Performance**: Profiling considerations
+
+### Context7 Integration Quality
+- [ ] **Library Versions**: Latest stable versions referenced
+- [ ] **Best Practices**: Current industry standards applied
+- [ ] **Security**: Secure coding practices implemented
+- [ ] **Dependencies**: Minimal and necessary dependencies only
+
+## 🚀 ADVANCED INTEGRATION TECHNIQUES
+
+### 1. Dynamic Context7 Queries
+```python
+def get_context7_optimized_code(library: str, task: str) -> str:
+    """
+    Generate Context7-optimized prompts for specific Python tasks
+    """
+    prompt = f"""
+    Create a production-ready Python solution for {task} using {library}.
+    Requirements:
+    - Latest {library} syntax and best practices
+    - Comprehensive error handling
+    - Type hints and documentation
+    - Performance optimization
+    - Security considerations
+    use context7
+    """
+    return prompt
+```
+
+### 2. Context7 Response Validation
+```python
+import ast
+import sys
+
+def validate_context7_code(code_string: str) -> dict:
+    """
+    Validate Context7 generated Python code
+    """
+    try:
+        # Parse the code
+        tree = ast.parse(code_string)
+        
+        # Basic validation checks
+        checks = {
+            'syntax_valid': True,
+            'has_imports': any(isinstance(node, ast.Import) for node in ast.walk(tree)),
+            'has_functions': any(isinstance(node, ast.FunctionDef) for node in ast.walk(tree)),
+            'has_docstrings': False,
+            'python_version_compatible': sys.version_info >= (3, 8)
+        }
+        
+        # Check for docstrings
+        for node in ast.walk(tree):
+            if isinstance(node, ast.FunctionDef):
+                if (node.body and isinstance(node.body[0], ast.Expr) and 
+                    isinstance(node.body[0].value, ast.Str)):
+                    checks['has_docstrings'] = True
+                    break
+        
+        return checks
+        
+    except SyntaxError as e:
+        return {'syntax_valid': False, 'error': str(e)}
+```
+
+## 🎪 EXAMPLE INTEGRATION WORKFLOWS
+
+### Workflow 1: FastAPI Development
+```
+1. "Create a FastAPI application with JWT authentication and PostgreSQL database. use context7"
+2. Validate generated code with Context7 latest patterns
+3. Add custom business logic
+4. Test with pytest
+5. Deploy with Docker
+```
+
+### Workflow 2: Data Science Pipeline
+```
+1. "Create a data analysis pipeline using pandas, numpy, and matplotlib for CSV processing. use context7"
+2. Verify DataFrame operations are optimized
+3. Add data validation layers
+4. Implement visualization components
+5. Create Jupyter notebook documentation
+```
+
+### Workflow 3: Machine Learning Model
+```
+1. "Create a machine learning model using scikit-learn for classification with hyperparameter tuning. use context7"
+2. Validate model training patterns
+3. Add cross-validation and metrics
+4. Implement model persistence
+5. Create prediction API
+```
+
+## 🔐 SECURITY & PERFORMANCE CONSIDERATIONS
+
+### Security Checklist
+- [ ] Input validation for all user inputs
+- [ ] SQL injection prevention
+- [ ] XSS protection in web applications
+- [ ] Secure file handling
+- [ ] Environment variable usage for secrets
+- [ ] HTTPS enforcement
+
+### Performance Optimization
+- [ ] Async/await patterns where applicable
+- [ ] Database query optimization
+- [ ] Memory usage monitoring
+- [ ] CPU profiling for bottlenecks
+- [ ] Caching strategies implementation
+- [ ] Connection pooling
+
+## 🎯 SUCCESS METRICS
+
+### Integration Success Indicators
+1. **Code Quality**: Generated code passes all linting checks
+2. **Functionality**: All features work as expected
+3. **Performance**: Meets or exceeds performance benchmarks
+4. **Maintainability**: Code is readable and well-documented
+5. **Security**: No security vulnerabilities detected
+6. **Context7 Relevance**: Uses latest library features and patterns
+
+### Failure Prevention
+- Always test Context7 generated code in isolated environment
+- Verify library versions match production requirements
+- Check for deprecated methods or patterns
+- Validate security implications of suggested code
+- Ensure proper error handling and logging
+
+---
+
+**Remember**: Context7 provides up-to-date documentation, but always validate generated code against your specific requirements, security standards, and performance needs. Use Context7 as a powerful starting point, not a final solution.
+
