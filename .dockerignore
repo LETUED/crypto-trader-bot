@@ -1,0 +1,75 @@
+# Git 관련
+.git
+.gitignore
+*.md
+!DOCKER_GUIDE.md
+
+# Python 캐시
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# 가상환경
+venv/
+.venv/
+env/
+.env/
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그 파일 (컨테이너에서 새로 생성)
+*.log
+logs/
+freqtrade_config/logs/
+
+# 백테스트 결과 (필요시 마운트)
+comprehensive_backtest_results.json
+freqtrade_config/backtest_results/
+
+# 사용자 데이터 (볼륨 마운트)
+freqtrade_config/user_data/
+user_data/
+
+# 데이터베이스 파일
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.db
+tradesv3.*
+
+# 환경변수 파일
+.env
+.env.*
+!.env.example
+
+# 임시 파일
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# 테스트 파일
+tests/
+*.test.py
+
+# 문서 (필요한 것만 포함)
+*.md
+!README.md
+!DOCKER_GUIDE.md
+
+# Docker 관련
+Dockerfile.*
+docker-compose.*.yml
+!docker-compose.yml

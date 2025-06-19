@@ -1,0 +1,109 @@
+version: '3.8'
+
+services:
+  # 다중 전략 서비스 (기본 실행)
+  crypto-trader:
+    build: .
+    container_name: letued-crypto-trader
+    restart: unless-stopped
+    ports:
+      - "8080:8080"  # MoniGoMani API
+      - "8081:8081"  # RSI API
+    volumes:
+      - ./freqtrade_config/logs:/app/freqtrade_config/logs
+      - ./freqtrade_config/user_data:/app/freqtrade_config/user_data
+      - ./data:/app/data
+      - ./freqtrade_config/backtest_results:/app/freqtrade_config/backtest_results
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN:-***REMOVED_TELEGRAM_TOKEN***}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-***REMOVED_CHAT_ID***}
+      - FREQTRADE_DRY_RUN=${FREQTRADE_DRY_RUN:-true}
+      - FREQTRADE_STAKE_AMOUNT=${FREQTRADE_STAKE_AMOUNT:-unlimited}
+      - FREQTRADE_MAX_OPEN_TRADES=${FREQTRADE_MAX_OPEN_TRADES:-3}
+    networks:
+      - crypto-trader-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    command: ["multi-strategy"]
+
+  # MoniGoMani 전략만 실행하는 서비스
+  monigomani-only:
+    build: .
+    container_name: letued-monigomani
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./freqtrade_config/logs:/app/freqtrade_config/logs
+      - ./freqtrade_config/user_data:/app/freqtrade_config/user_data
+      - ./data:/app/data
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN:-***REMOVED_TELEGRAM_TOKEN***}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-***REMOVED_CHAT_ID***}
+      - FREQTRADE_DRY_RUN=${FREQTRADE_DRY_RUN:-true}
+    networks:
+      - crypto-trader-network
+    command: ["monigomani-only"]
+    profiles:
+      - monigomani
+
+  # RSI 전략만 실행하는 서비스
+  rsi-only:
+    build: .
+    container_name: letued-rsi
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./freqtrade_config/logs:/app/freqtrade_config/logs
+      - ./freqtrade_config/user_data:/app/freqtrade_config/user_data
+      - ./data:/app/data
+    environment:
+      - FREQTRADE_DRY_RUN=${FREQTRADE_DRY_RUN:-true}
+    networks:
+      - crypto-trader-network
+    command: ["rsi-only"]
+    profiles:
+      - rsi
+
+  # 백테스트 서비스
+  backtest:
+    build: .
+    container_name: letued-backtest
+    volumes:
+      - ./freqtrade_config/logs:/app/freqtrade_config/logs
+      - ./freqtrade_config/backtest_results:/app/freqtrade_config/backtest_results
+      - ./data:/app/data
+    networks:
+      - crypto-trader-network
+    command: ["bash"]
+    profiles:
+      - backtest
+
+  # 모니터링 대시보드 (선택사항)
+  monitoring:
+    image: grafana/grafana:latest
+    container_name: letued-monitoring
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./monitoring/grafana:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin123}
+    networks:
+      - crypto-trader-network
+    profiles:
+      - monitoring
+
+networks:
+  crypto-trader-network:
+    driver: bridge
+
+volumes:
+  grafana-storage:
