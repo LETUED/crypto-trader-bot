@@ -125,4 +125,7 @@ docs/_build/
 
 # Telegram bot tokens
 telegram_token.txt
-chat_id.txt.cursor/
+chat_id.txt
+
+# Cursor IDE
+.cursor/
