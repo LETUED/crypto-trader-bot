@@ -23,10 +23,11 @@ python strategy_summary_report.py
 
 ## 리스크 관리
 
-- 포지션 사이징 4종: 고정 비율(기본 2%), Kelly, 변동성 기반, ATR 기반 (`core/risk_manager.py`)
-- 낙폭 15% 도달 시 거래 중단
-- 5거래 중 4거래 손실 시 포지션 축소
-- 2시간 이상 -3% 지속 시 강제 청산
+`core/risk_manager.py`에 구현된 리스크 로직 (독립 모듈 — dry-run 실거래 실행은 freqtrade가 담당하며 이 모듈은 지표 산출용):
+
+- 포지션 사이징 5종: 고정 금액, 고정 비율(기본 2%), Kelly, 변동성 기반, ATR 기반
+- 낙폭 15% 초과 시 critical 경고 상태(12%에서 축소 트리거)
+- 연속 손실·시간 기반 손절 규칙
 
 ## 설치
 
@@ -48,7 +49,7 @@ python main.py run --dry-run --strategy RSIStrategy        # 드라이런
 python main.py backtest --strategy RSIStrategy --timerange 20230601-20231201
 ```
 
-Docker 운용은 `docker-compose.yml`과 `docker-entrypoint.sh`(trade/backtest/webserver 모드), 클라우드 배포는 `deploy/` 참고.
+컨테이너 실행은 `INSTALL.md`의 Dockerfile 예시 참고 (별도 docker-compose·배포 스크립트는 미포함).
 
 ## 상태
 
