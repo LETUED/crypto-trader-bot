@@ -128,3 +128,7 @@ docs/_build/
 # Telegram bot tokens
 telegram_token.txt
 chat_id.txt.cursor/
+
+# 로컬 전용
+.cursor/
+.cursorrules
