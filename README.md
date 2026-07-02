@@ -1,6 +1,10 @@
 # crypto-trader-bot
 
-Freqtrade 기반 암호화폐 자동거래 봇. RSI 역추세 전략과 MoniGoMani 조합 전략을 dry-run으로 돌리고, 48개 조합 백테스트로 비교하는 구성이다. 2025-06 작업, 현재는 아카이브.
+> Freqtrade 기반 암호화폐 자동거래 봇. RSI 역추세와 MoniGoMani 조합 전략을 dry-run으로 돌리고 48조합 백테스트로 비교한다. 2025-06, 아카이브.
+
+## 무엇인가
+
+Freqtrade 프레임워크 위에 자체 전략·리스크·백테스트 레이어를 얹은 봇이다. 이 저장소의 한계(남의 프레임워크 위)를 인식하고 이후 [LETRADE_V1](https://github.com/LETUED/LETRADE_V1)에서 자체 아키텍처로 재구축했다.
 
 ## 전략
 
@@ -10,6 +14,14 @@ Freqtrade 기반 암호화폐 자동거래 봇. RSI 역추세 전략과 MoniGoMa
 - 손절 -4%, 익절은 시간 단계형 (즉시 8% → 15분 4% → 30분 2% → 1시간 1%)
 
 **MoniGoMani** — 8개 기술지표 가중 조합. `freqtrade_config/strategies/MoniGoManiFreqtrade.py`, 최적화 버전은 `strategies/optimized_monigomani_strategy.py`.
+
+## 리스크 관리
+
+`core/risk_manager.py`에 구현된 리스크 로직 (독립 모듈 — dry-run 실거래 실행은 freqtrade가 담당하며 이 모듈은 지표 산출용):
+
+- 포지션 사이징 5종: 고정 금액, 고정 비율(기본 2%), Kelly, 변동성 기반, ATR 기반
+- 낙폭 15% 초과 시 critical 경고 상태(12%에서 축소 트리거)
+- 연속 손실·시간 기반 손절 규칙
 
 ## 백테스트
 
@@ -21,15 +33,7 @@ python backtest_all_strategies.py
 python strategy_summary_report.py
 ```
 
-## 리스크 관리
-
-`core/risk_manager.py`에 구현된 리스크 로직 (독립 모듈 — dry-run 실거래 실행은 freqtrade가 담당하며 이 모듈은 지표 산출용):
-
-- 포지션 사이징 5종: 고정 금액, 고정 비율(기본 2%), Kelly, 변동성 기반, ATR 기반
-- 낙폭 15% 초과 시 critical 경고 상태(12%에서 축소 트리거)
-- 연속 손실·시간 기반 손절 규칙
-
-## 설치
+## 실행
 
 ```bash
 python -m venv venv
@@ -37,20 +41,14 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 brew install ta-lib             # TA-Lib 시스템 패키지 (문제 시 INSTALL.md)
 pip install -r requirements.txt
 cp .env.example .env            # API 키·거래 설정 입력
-```
 
-주요 환경변수: `FREQTRADE_API_KEY/SECRET`, `FREQTRADE_EXCHANGE=binance`, `FREQTRADE_TRADING_MODE=dry_run`, `MONITOR_TELEGRAM_*` (알림 선택).
-
-## 실행
-
-```bash
-python main.py validate                                    # 설정 검증
-python main.py run --dry-run --strategy RSIStrategy        # 드라이런
+python main.py validate                              # 설정 검증
+python main.py run --dry-run --strategy RSIStrategy  # 드라이런
 python main.py backtest --strategy RSIStrategy --timerange 20230601-20231201
 ```
 
-컨테이너 실행은 `INSTALL.md`의 Dockerfile 예시 참고 (별도 docker-compose·배포 스크립트는 미포함).
+주요 환경변수: `FREQTRADE_API_KEY/SECRET`, `FREQTRADE_EXCHANGE=binance`, `FREQTRADE_TRADING_MODE=dry_run`, `MONITOR_TELEGRAM_*`(알림 선택). 컨테이너 실행은 `INSTALL.md`의 Dockerfile 예시 참고(별도 docker-compose·배포 스크립트는 미포함).
 
 ## 상태
 
-dry-run 검증 단계까지 만들고 중단했다. 실거래 이력 없음. 이후 자체 아키텍처로 다시 만들면서 이 저장소는 그대로 보존.
+dry-run 검증 단계까지 만들고 중단했다. 실거래 이력 없음. 이후 자체 아키텍처(LETRADE_V1)로 재구축하면서 이 저장소는 그대로 보존.
