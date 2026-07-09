@@ -11,7 +11,7 @@ from datetime import datetime
 import os
 
 class FreqtradeMonitor:
-    def __init__(self, base_url="http://127.0.0.1:8080", username="freqtrader", password="SuperSecretPassword"):
+    def __init__(self, base_url="http://127.0.0.1:8080", username="freqtrader", password="CHANGE_ME"):
         self.base_url = base_url
         self.auth = (username, password)
         self.session = requests.Session()

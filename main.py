@@ -119,10 +119,10 @@ def create_freqtrade_config(
                 "listen_port": monitor_config.api_server_port,
                 "verbosity": "info",
                 "enable_openapi": True,
-                "jwt_secret_key": "your-jwt-secret-key-here",
+                "jwt_secret_key": "CHANGE_ME",
                 "CORS_origins": ["http://localhost:3000"],
                 "username": "admin",
-                "password": "crypto2024!"
+                "password": "CHANGE_ME"
             },
             
             # 텔레그램 설정

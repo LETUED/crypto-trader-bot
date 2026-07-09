@@ -151,6 +151,14 @@ pip install python-telegram-bot structlog pydantic python-dotenv
 pip install pytest black isort mypy
 ```
 
+## 실행 전 시크릿 교체 (필수)
+
+저장소의 설정 파일에는 실제 값 대신 `CHANGE_ME` 플레이스홀더가 들어 있다. API 서버를 켜기 전에 반드시 본인 값으로 교체할 것:
+
+- `freqtrade_config/config.json` — `api_server.jwt_secret_key` / `ws_token` / `password`
+- `freqtrade_config/config_rsi.json` — 동일 3개 키
+- 거래소 API 키는 `.env`(`.env.example` 참고)로만 주입 — 설정 파일에 직접 쓰지 말 것
+
 ## 5. 설치 검증
 
 모든 패키지가 올바르게 설치되었는지 확인:

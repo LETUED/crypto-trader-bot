@@ -61,11 +61,11 @@
         "listen_port": 8081,
         "verbosity": "error",
         "enable_openapi": false,
-        "jwt_secret_key": "rsi-secret-key",
-        "ws_token": "rsiws",
+        "jwt_secret_key": "CHANGE_ME",
+        "ws_token": "CHANGE_ME",
         "CORS_origins": [],
         "username": "rsitrader",
-        "password": "RSISecretPassword"
+        "password": "CHANGE_ME"
     },
     "bot_name": "RSI_Strategy_DryRun",
     "initial_state": "running",

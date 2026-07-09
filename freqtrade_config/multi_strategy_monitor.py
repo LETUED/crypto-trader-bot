@@ -18,13 +18,13 @@ class MultiStrategyMonitor:
         self.strategies = {
             'MoniGoMani': {
                 'url': 'http://127.0.0.1:8080',
-                'auth': ('freqtrader', 'SuperSecretPassword'),
+                'auth': ('freqtrader', 'CHANGE_ME'),
                 'config': 'config.json',
                 'status': 'Unknown'
             },
             'RSI': {
                 'url': 'http://127.0.0.1:8081', 
-                'auth': ('rsitrader', 'RSISecretPassword'),
+                'auth': ('rsitrader', 'CHANGE_ME'),
                 'config': 'config_rsi.json',
                 'status': 'Unknown'
             }
