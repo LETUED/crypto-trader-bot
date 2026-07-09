@@ -45,10 +45,17 @@ cp .env.example .env            # API 키·거래 설정 입력
 python main.py validate                              # 설정 검증
 python main.py run --dry-run --strategy RSIStrategy  # 드라이런
 python main.py backtest --strategy RSIStrategy --timerange 20230601-20231201
+# 주의: freqtrade CLI 백테스트는 user_data/ 데이터 다운로드·경로 설정이 선행돼야 한다 (미설정 상태 — 위 합성 백테스트 스크립트가 검증 경로)
 ```
 
 주요 환경변수: `FREQTRADE_API_KEY/SECRET`, `FREQTRADE_EXCHANGE=binance`, `FREQTRADE_TRADING_MODE=dry_run`, `MONITOR_TELEGRAM_*`(알림 선택). 컨테이너 실행은 `INSTALL.md`의 Dockerfile 예시 참고(별도 docker-compose·배포 스크립트는 미포함).
 
+## 결과
+
+2026-07-09 재현 실행 — 단위 테스트 18개 중 16개 통과(2건은 2026 라이브러리 버전 차이로 실패), 전략 비교·시나리오 백테스트(합성 데이터, 시드 고정) 완주. 일부 전략 변형(MoniGoMani Optimized)은 신버전 pandas에서 신호를 내지 못함 — 상세와 전체 출력은 [docs/백테스트증거_2026-07-09.md](docs/백테스트증거_2026-07-09.md).
+freqtrade 2026.6·TA-Lib 0.6.8 핀 고정 — `.venv`에 `pip install -r requirements.txt`로 재현.
+
 ## 상태
 
 dry-run 검증 단계까지 만들고 중단했다. 실거래 이력 없음. 이후 자체 아키텍처(LETRADE_V1)로 재구축하면서 이 저장소는 그대로 보존.
+2026-07 정비: 의존성 핀(3.13 실측)·백테스트 재현 증거·시크릿 플레이스홀더 정리. dry-run 중단·실거래 이력 없음은 그대로.
