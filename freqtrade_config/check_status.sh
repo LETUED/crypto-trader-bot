@@ -8,7 +8,7 @@ echo ""
 
 # API 기본 설정
 API_URL="http://127.0.0.1:8080/api/v1"
-AUTH="-u freqtrader:SuperSecretPassword"
+AUTH="-u freqtrader:CHANGE_ME"
 
 echo "💰 잔고 정보:"
 curl -s $AUTH $API_URL/balance | python3 -c "

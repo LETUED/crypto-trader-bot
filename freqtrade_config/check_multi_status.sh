@@ -8,10 +8,10 @@ echo ""
 
 # API 설정
 MONIGOMANI_URL="http://127.0.0.1:8080/api/v1"
-MONIGOMANI_AUTH="-u freqtrader:SuperSecretPassword"
+MONIGOMANI_AUTH="-u freqtrader:CHANGE_ME"
 
 RSI_URL="http://127.0.0.1:8081/api/v1"
-RSI_AUTH="-u rsitrader:RSISecretPassword"
+RSI_AUTH="-u rsitrader:CHANGE_ME"
 
 echo "📊 전략별 상태 요약:"
 echo "-----------------------------------------------"

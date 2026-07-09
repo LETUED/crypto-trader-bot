@@ -52,7 +52,7 @@ python main.py backtest --strategy RSIStrategy --timerange 20230601-20231201
 
 ## 결과
 
-2026-07-09 재현 실행 — 단위 테스트 18개 중 16개 통과(2건은 2026 라이브러리 버전 차이로 실패), 전략 비교·시나리오 백테스트(합성 데이터, 시드 고정) 완주. 일부 전략 변형(MoniGoMani Optimized)은 신버전 pandas에서 신호를 내지 못함 — 상세와 전체 출력은 [docs/백테스트증거_2026-07-09.md](docs/백테스트증거_2026-07-09.md).
+2026-07-09 재현 실행 — 단위 테스트 18개 중 16개 통과(1건은 신버전 pandas 동작 차이, 1건은 광범위 예외 처리가 검증 ValueError를 삼키는 기존 코드 특성), 전략 비교·시나리오 백테스트(합성 데이터, 시드 고정) 완주. 일부 전략 변형(MoniGoMani Optimized)은 신버전 pandas에서 신호를 내지 못함 — 상세와 전체 출력은 [docs/백테스트증거_2026-07-09.md](docs/백테스트증거_2026-07-09.md).
 freqtrade 2026.6·TA-Lib 0.6.8 핀 고정 — `.venv`에 `pip install -r requirements.txt`로 재현.
 
 ## 상태
